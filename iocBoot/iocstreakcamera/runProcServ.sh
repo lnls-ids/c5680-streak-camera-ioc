@@ -9,4 +9,4 @@ set +u
 set -u
 
 # Run run*.sh scripts with procServ
-procServ -f -n SC5680_${DEVICE} -i ^C^D unix:./procserv.sock ./startup.sh "$@"
+procServ -f -n SC5680_${PREFIX} -i ^C^D unix:./procserv.sock ./startup.sh "$@"

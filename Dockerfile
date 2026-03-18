@@ -4,7 +4,7 @@ FROM debian:bookworm-slim
 ARG COMMIT
 ARG REPOSITORY
 ARG REPOSITORY_URL
-ARG EPICS_VERSION=R3.15.9
+ARG EPICS_VERSION=3.15.9
 ARG ASYN_VERSION=R4-45
 ARG CALC_VERSION=R3-7-5
 ARG STREAM_VERSION=2.8.24
@@ -36,7 +36,7 @@ ENV EPICS_IOC_LOG_INET=0.0.0.0
 ENV EPICS_IOC_LOG_PORT=7011
 ENV EPICS_BASE=/opt/epics-${EPICS_VERSION}/base
 ENV EPICS_MODULES=/opt/epics-${EPICS_VERSION}/modules
-ENV ASYN=${EPICS_MODULES}/asyn-{ASYN_VERSION}
+ENV ASYN=${EPICS_MODULES}/asyn-${ASYN_VERSION}
 ENV CALC=${EPICS_MODULES}/calc-${CALC_VERSION}
 ENV STREAM=${EPICS_MODULES}/StreamDevice-${STREAM_VERSION}
 ENV PATH=${EPICS_BASE}/bin/${EPICS_HOST_ARCH}:${PATH}
@@ -63,17 +63,17 @@ RUN wget --no-check-certificate https://github.com/epics-modules/calc/archive/${
     make -j$(nproc)
 
 # --- Asyn Driver ---
-RUN wget --no-check-certificate https://www.aps.anl.gov/epics/download/modules/asyn-${ASYN_VERSION}.tar.gz && \
-    tar -xvzf asyn-${ASYN_VERSION}.tar.gz && \
-    rm -f asyn-${ASYN_VERSION}.tar.gz && \
+RUN wget --no-check-certificate https://github.com/epics-modules/asyn/archive/${ASYN_VERSION}.tar.gz && \
+    tar -xvzf ${ASYN_VERSION}.tar.gz && \
+    rm -f ${ASYN_VERSION}.tar.gz && \
     cd ${ASYN} && \
-    sed -i -e '3,4s/^/#/' -e '8,11s/^/#/' -e '14cEPICS_BASE='${EPICS_BASE} configure/RELEASE && \
+    sed -i -e '6,17s/^/#/' -e '22cCALC='${CALC} -e '32cEPICS_BASE='${EPICS_BASE} configure/RELEASE && \
     sed -i '/TIRPC/c\TIRPC=YES' configure/CONFIG_SITE && \
     make -j$(nproc)
 
 # --- Stream Device ---
-RUN wget --no-check-certificate https://github.com/paulscherrerinstitute/StreamDevice/archive/2.8.16.tar.gz && \
-    tar -zxvf ${STREAM_VERSION}.tar.gz && \
+RUN wget --no-check-certificate https://github.com/paulscherrerinstitute/StreamDevice/archive/${STREAM_VERSION}.tar.gz && \
+    tar -xvzf ${STREAM_VERSION}.tar.gz && \
     rm ${STREAM_VERSION}.tar.gz && \
     cd ${STREAM} && \
     sed -i -e '11,18s/^/#/' -e '21,22s/^/#/' -e '29,31s/^/#/' -e '20cASYN='${ASYN} -e '21cCALC='${CALC} -e '25cEPICS_BASE='${EPICS_BASE} configure/RELEASE && \
@@ -87,7 +87,7 @@ WORKDIR /opt/${REPOSITORY}
 RUN git fetch && \
     git checkout ${COMMIT} && \
     echo EPICS_BASE=${EPICS_BASE} > configure/RELEASE.local && \
-    echo ASYN=${AUTOSAVE} >> configure/RELEASE.local && \
+    echo ASYN=${ASYN} >> configure/RELEASE.local && \
     echo CALC=${CALC} >> configure/RELEASE.local && \
     echo STREAM=${STREAM} >> configure/RELEASE.local && \
     make -j$(nproc) && \

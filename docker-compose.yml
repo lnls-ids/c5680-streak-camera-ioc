@@ -9,8 +9,8 @@ services:
     command: [
       "-P", "${PREFIX}", 
       "-i", "${IP_ADDR}", 
-      "-C", "${COMMANDS_TCP:1001}",
-      "-D", "${DATA_TCP:1002}"
+      "-C", "${COMMANDS_TCP:-1001}",
+      "-D", "${DATA_TCP:-1002}"
       ]
     logging:
       driver: "json-file"
