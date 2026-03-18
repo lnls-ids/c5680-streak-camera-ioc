@@ -1,0 +1,11 @@
+[Unit]
+Description=Streak Camera EPICS Input/Output Controller
+
+[Service]
+Type=simple
+ExecStart=/usr/bin/procServ 50000 /opt/streak-camera/ioc/iocBoot/st.cmd
+Restart=always
+RemainAfterExit=yes
+
+[Install]
+WantedBy=multi-user.target

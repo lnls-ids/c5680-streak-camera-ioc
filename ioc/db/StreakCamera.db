@@ -1,0 +1,294 @@
+## Command Records
+
+record(ao, "SC:App:Start-Cmd") {
+    field(DTYP, "stream")
+    field(OUT,  "@StreakCamera.proto appStart $(port)")
+}
+
+record(ao, "SC:App:End-Cmd") {
+    field(DTYP, "stream")
+    field(OUT,  "@StreakCamera.proto appEnd $(port)")
+}
+
+record(mbbo, "SC:AcqParams:Start-Cmd") {
+    field(DTYP, "stream")
+    field(OUT,  "@StreakCamera.proto acqStart(%s) $(port)")
+    field(ZRST, "Live")            field(ZRVL, "0")
+    field(ONST, "Acquire")         field(ONVL, "1")
+    field(TWST, "AI")              field(TWVL, "2")
+    field(THST, "PC")              field(THVL, "3")
+}
+
+record(ao, "SC:Lut:SetAuto-Cmd") {
+    field(DTYP, "stream")
+    field(OUT,  "@StreakCamera.proto lutSetAuto() $(port)")
+}
+
+record(ao, "SC:ImgParams:CreateVerRectRoi-Cmd") {
+    field(DTYP, "stream")
+    field(OUT, "@StreakCamera.proto imgRoiSet(VerRect,%(SC:ImgParams:RoiIniX-SP)d,0,%(SC:ImgParams:RoiWidthX-SP)d,%(SC:ImgParams:ImageHeight-Mon)d) $(port)")
+}
+
+## Setpoint Records
+
+record(ao, "SC:GenParams:TimeRange-SP") {
+    field(DTYP, "stream")
+    field(OUT,  "@StreakCamera.proto devParamSet(TD,Time Range,%d) $(port)")
+}
+
+record(mbbo, "SC:GenParams:Mode-SP") {
+    field(DTYP, "stream")
+    field(OUT,  "@StreakCamera.proto devParamSet(TD,Mode,%s) $(port)")
+    field(ZRST, "Focus")           field(ZRVL, "0")
+    field(ONST, "Operate")         field(ONVL, "1")
+}
+
+record(mbbo, "SC:GenParams:GateMode-SP") {
+    field(DTYP, "stream")
+    field(OUT,  "@StreakCamera.proto devParamSet(TD,Gate Mode,%s) $(port)")
+    field(ZRST, "Normal")          field(ZRVL, "0")
+    field(ONST, "Ext.")            field(ONVL, "1")
+}
+
+record(ao, "SC:GenParams:MCPGain-SP") {
+    field(DTYP, "stream")
+    field(OUT,  "@StreakCamera.proto devParamSet(TD,MCP Gain,%d) $(port)")
+}
+
+record(mbbo, "SC:GenParams:Shutter-SP") {
+    field(DTYP, "stream")
+    field(OUT,  "@StreakCamera.proto devParamSet(TD,Shutter,%s) $(port)")
+    field(ZRST, "Closed")          field(ZRVL, "0")
+    field(ONST, "Open")            field(ONVL, "1")
+}
+
+record(mbbo, "SC:GenParams:BlankingAmp-SP") {
+    field(DTYP, "stream")
+    field(OUT,  "@StreakCamera.proto devParamSet(TD,Blanking Amp.,%s) $(port)")
+    field(ZRST, "off")             field(ZRVL, "0")
+    field(ONST, "100 ns")          field(ONVL, "1")
+    field(TWST, "200 ns")          field(TWVL, "2")
+    field(THST, "500 ns")          field(THVL, "3")
+    field(FRST, "1 us")            field(FRVL, "4")
+    field(FVST, "2 us")            field(FVVL, "5")
+    field(SXST, "5 us")            field(SXVL, "6")
+    field(SVST, "10 us")           field(SVVL, "7")
+    field(EIST, "20 us")           field(EIVL, "8")
+    field(NIST, "50 us")           field(NIVL, "9")
+    field(TEST, "100 us")          field(TEVL, "10")
+    field(ELST, "200 us")          field(ELVL, "11")
+    field(TVST, "500 us")          field(TVVL, "12")
+    field(TTST, "1 ms")            field(TTVL, "13")
+    field(FTST, "2 ms")            field(FTVL, "14")
+    field(FFST, "5 ms")            field(FFVL, "15")
+}
+
+record(mbbo, "SC:GenParams:HTrigStatus-SP") {
+    field(DTYP, "stream")
+    field(OUT,  "@StreakCamera.proto devParamSet(TD,H Trig. status,%s) $(port)")
+    field(ZRST, "Ready")           field(ZRVL, "0")
+    field(ONST, "Fired")           field(ONVL, "1")
+    field(TWST, "Do Reset")        field(TWVL, "2")
+}
+
+record(mbbo, "SC:GenParams:HTrigMode-SP") {
+    field(DTYP, "stream")
+    field(OUT,  "@StreakCamera.proto devParamSet(TD,H Trig. mode,%s) $(port)")
+    field(ZRST, "Cont")            field(ZRVL, "0")
+    field(ONST, "Single")          field(ONVL, "1")
+}
+
+record(ao, "SC:GenParams:HTrigLevel-SP") {
+    field(DTYP, "stream")
+    field(OUT,  "@StreakCamera.proto devParamSet(TD,H Trig. level,%d) $(port)")
+}
+
+record(ao, "SC:GenParams:Delay-SP") {
+    field(DTYP, "stream")
+    field(OUT,  "@StreakCamera.proto devParamSet(TD,Delay,%d) $(port)")
+}
+
+record(ao, "SC:GenParams:FocusTimeOver-SP") {
+    field(DTYP, "stream")
+    field(OUT,  "@StreakCamera.proto devParamSet(TD,FocusTimeOver,%d) $(port)")
+}
+
+record(ao, "SC:CamParams:Exposure-SP") {
+    field(DESC, "Camera exposure time in ms")
+    field(DTYP, "stream")
+    field(OUT,  "@StreakCamera.proto camParamSet(Acquire,Exposure,%.2f ms) $(port)")
+}
+
+record(ao, "SC:ImgParams:RoiIniX-SP")   {}
+record(ao, "SC:ImgParams:RoiIniY-SP")   {}
+record(ao, "SC:ImgParams:RoiWidthX-SP") {}
+record(ao, "SC:ImgParams:RoiWidthY-SP") {}
+
+## Readback Records
+
+record(ai, "SC:GenParams:TimeRange-RB") {
+    field(DTYP, "stream")
+    field(INP,  "@StreakCamera.proto devParamGetFloat(TD,Time Range) $(port)")
+    field(SCAN, "5 second")
+}
+
+record(mbbi, "SC:GenParams:Mode-RB") {
+    field(DTYP, "stream")
+    field(INP,  "@StreakCamera.proto devParamGetStr(TD,Mode) $(port)")
+    field(ZRST, "Focus")           field(ZRVL, "0")
+    field(ONST, "Operate")         field(ONVL, "1")
+    field(SCAN, "5 second")
+}
+
+record(mbbi, "SC:GenParams:GateMode-RB") {
+    field(DTYP, "stream")
+    field(INP,  "@StreakCamera.proto devParamGetStr(TD,Gate Mode) $(port)")
+    field(ZRST, "Normal")          field(ZRVL, "0")
+    field(ONST, "Ext.")            field(ONVL, "1")
+    field(SCAN, "5 second")
+}
+
+record(ai, "SC:GenParams:MCPGain-RB") {
+    field(DTYP, "stream")
+    field(INP,  "@StreakCamera.proto devParamGetFloat(TD,MCP Gain) $(port)")
+    field(SCAN, "5 second")
+}
+
+record(mbbi, "SC:GenParams:Shutter-RB") {
+    field(DTYP, "stream")
+    field(INP,  "@StreakCamera.proto devParamGetStr(TD,Shutter) $(port)")
+    field(ZRST, "Closed")          field(ZRVL, "0")
+    field(ONST, "Open")            field(ONVL, "1")
+    field(SCAN, "5 second")
+}
+
+record(mbbi, "SC:GenParams:BlankingAmp-RB") {
+    field(DTYP, "stream")
+    field(INP,  "@StreakCamera.proto devParamGetStr(TD,Blanking Amp.) $(port)")
+    field(ZRST, "off")             field(ZRVL, "0")
+    field(ONST, "100 ns")          field(ONVL, "1")
+    field(TWST, "200 ns")          field(TWVL, "2")
+    field(THST, "500 ns")          field(THVL, "3")
+    field(FRST, "1 us")            field(FRVL, "4")
+    field(FVST, "2 us")            field(FVVL, "5")
+    field(SXST, "5 us")            field(SXVL, "6")
+    field(SVST, "10 us")           field(SVVL, "7")
+    field(EIST, "20 us")           field(EIVL, "8")
+    field(NIST, "50 us")           field(NIVL, "9")
+    field(TEST, "100 us")          field(TEVL, "10")
+    field(ELST, "200 us")          field(ELVL, "11")
+    field(TVST, "500 us")          field(TVVL, "12")
+    field(TTST, "1 ms")            field(TTVL, "13")
+    field(FTST, "2 ms")            field(FTVL, "14")
+    field(FFST, "5 ms")            field(FFVL, "15")
+    field(SCAN, "5 second")
+}
+
+record(mbbi, "SC:GenParams:HTrigStatus-RB") {
+    field(DTYP, "stream")
+    field(INP,  "@StreakCamera.proto devParamGetStr(TD,H Trig. status) $(port)")
+    field(ZRST, "Ready")           field(ZRVL, "0")
+    field(ONST, "Fired")           field(ONVL, "1")
+    field(TWST, "Do Reset")        field(TWVL, "2")
+    field(SCAN, "5 second")
+}
+
+record(mbbi, "SC:GenParams:HTrigMode-RB") {
+    field(DTYP, "stream")
+    field(INP,  "@StreakCamera.proto devParamGetStr(TD,H Trig. mode) $(port)")
+    field(ZRST, "Cont")            field(ZRVL, "0")
+    field(ONST, "Single")          field(ONVL, "1")
+    field(SCAN, "5 second")
+}
+
+record(ai, "SC:GenParams:HTrigLevel-RB") {
+    field(DTYP, "stream")
+    field(INP,  "@StreakCamera.proto devParamGetFloat(TD,H Trig. level) $(port)")
+    field(SCAN, "5 second")
+}
+
+record(ai, "SC:GenParams:Delay-RB") {
+    field(DTYP, "stream")
+    field(INP,  "@StreakCamera.proto devParamGetFloat(TD,Delay) $(port)")
+    field(SCAN, "5 second")
+}
+
+record(ai, "SC:GenParams:FocusTimeOver-RB") {
+    field(DTYP, "stream")
+    field(INP,  "@StreakCamera.proto devParamGetFloat(TD,FocusTimeOver) $(port)")
+    field(SCAN, "5 second")
+}
+
+record(calc, "SC:CamParams:Exposure-RB") {
+    field(CALC, "A*B")
+    field(INPA, "SC:CamParams:ExposureValue-RB")
+    field(INPB, "SC:CamParams:ExposureUnit-RB")
+    field(SCAN, "5 second")
+}
+
+record(ai, "SC:CamParams:ExposureValue-RB") {
+    field(DTYP, "stream")
+    field(INP, "@StreakCamera.proto camParamGetExp(SC:CamParams:ExposureUnit-RB) $(port)")
+    field(SCAN, "5 second")
+}
+
+record(mbbi, "SC:CamParams:ExposureUnit-RB") {
+    field(ZRST, "us")              field(ZRVL, "0")
+    field(ONST, "ms")              field(ONVL, "1")
+}
+
+record(ai, "SC:LUT:LowerLimit-RB") {
+    field(DTYP, "stream")
+    field(INP,  "@StreakCamera.proto lutGetLimits(SC:LUT:UpperLimit-RB) $(port)")
+    field(SCAN, "5 second")
+}
+
+record(ai, "SC:LUT:UpperLimit-RB") {}
+
+
+record(ai, "SC:ImgParams:RoiIniX-RB"){
+    field(DTYP, "stream")
+    field(INP,  "@StreakCamera.proto ImgRoiGet(SC:ImgParams:RoiIniY-RB,SC:ImgParams:RoiWidthX-RB,SC:ImgParams:RoiWidthY-RB) $(port)")
+    field(SCAN, "5 second")
+}
+
+record(ao, "SC:ImgParams:RoiIniY-RB")   {}
+record(ao, "SC:ImgParams:RoiWidthX-RB") {}
+record(ao, "SC:ImgParams:RoiWidthY-RB") {}
+
+## IOC control
+
+record(calcout, "SC:IocControl:EnableGetImgParams") {
+    field(CALC, "A==0")
+    field(INPA, "SC:ImgParams:ImageOpened-Mon")
+    field(OUT,  "SC:IocControl:EnableGetImgParamsFanout MSS PP")
+    field(SCAN, "2 second")
+}
+
+record(dfanout, "SC:IocControl:EnableGetImgParamsFanout") {
+    field(OUTA, "SC:ImgParams:RoiIniX-RB.DISV")
+    field(OUTB, "SC:ImgProfile:FHWM-Mon.DISV")
+    field(OUTC, "SC:ImgParams:ImageWidth-Mon.DISV")
+}
+
+## Monitoring Records
+
+record(ai, "SC:ImgParams:ImageHeight-Mon") {}
+
+record(ai, "SC:ImgParams:ImageWidth-Mon") {
+    field(DTYP, "stream")
+    field(INP,  "@StreakCamera.proto imgDataSize(SC:ImgParams:ImageHeight-Mon) $(port)")
+    field(SCAN, "5 second")
+}
+
+record(ai, "SC:ImgParams:ImageOpened-Mon") {
+    field(DTYP, "stream")
+    field(INP,  "@StreakCamera.proto imgStatusGet() $(port)")
+    field(SCAN, "5 second")
+}
+
+record(ai, "SC:ImgProfile:FHWM-Mon") {
+    field(DTYP, "stream")
+    field(INP,  "@StreakCamera.proto qprFWHMGet() $(port)")
+    field(SCAN, "5 second")
+}
