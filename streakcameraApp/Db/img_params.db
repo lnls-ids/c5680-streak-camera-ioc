@@ -6,43 +6,43 @@
 # DPORT = RemoteEx data port (1002)
 #################################################
 
-record(ao, "${DEVICE}:ImgParams:CreateVerRectRoi-Cmd") {
+record(ao, "${DEVICE}ImgParams:CreateVerRectRoi-Cmd") {
     field(DTYP, "stream")
-    field(OUT, "@streakcamera.proto imgRoiSet(VerRect,%(SC:ImgParams:RoiIniX-SP)d,0,%(SC:ImgParams:RoiWidthX-SP)d,%(SC:ImgParams:ImageHeight-Mon)d) $(CPORT)")
+    field(OUT, "@streakcamera.proto imgRoiSet(VerRect,%(${DEVICE}ImgParams:RoiIniX-SP)d,0,%(${DEVICE}ImgParams:RoiWidthX-SP)d,%(${DEVICE}ImgParams:ImageHeight-Mon)d) $(CPORT)")
 }
 
-record(ao, "${DEVICE}:ImgParams:RoiIniX-SP")   {}
-record(ao, "${DEVICE}:ImgParams:RoiIniY-SP")   {}
-record(ao, "${DEVICE}:ImgParams:RoiWidthX-SP") {}
-record(ao, "${DEVICE}:ImgParams:RoiWidthY-SP") {}
+record(ao, "${DEVICE}ImgParams:RoiIniX-SP")   {}
+record(ao, "${DEVICE}ImgParams:RoiIniY-SP")   {}
+record(ao, "${DEVICE}ImgParams:RoiWidthX-SP") {}
+record(ao, "${DEVICE}ImgParams:RoiWidthY-SP") {}
 
 ## READBACKS
-record(ai, "${DEVICE}:ImgParams:RoiIniX-RB"){
+record(ai, "${DEVICE}ImgParams:RoiIniX-RB"){
     field(DTYP, "stream")
-    field(INP,  "@streakcamera.proto ImgRoiGet(SC:ImgParams:RoiIniY-RB,SC:ImgParams:RoiWidthX-RB,SC:ImgParams:RoiWidthY-RB) $(CPORT)")
+    field(INP,  "@streakcamera.proto ImgRoiGet(${DEVICE}ImgParams:RoiIniY-RB,${DEVICE}ImgParams:RoiWidthX-RB,${DEVICE}ImgParams:RoiWidthY-RB) $(CPORT)")
     field(SCAN, "5 second")
 }
 
-record(ao, "${DEVICE}:ImgParams:RoiIniY-RB")   {}
-record(ao, "${DEVICE}:ImgParams:RoiWidthX-RB") {}
-record(ao, "${DEVICE}:ImgParams:RoiWidthY-RB") {}
+record(ao, "${DEVICE}ImgParams:RoiIniY-RB")   {}
+record(ao, "${DEVICE}ImgParams:RoiWidthX-RB") {}
+record(ao, "${DEVICE}ImgParams:RoiWidthY-RB") {}
 
 ## Monitoring Records
-record(ai, "${DEVICE}:ImgParams:ImageHeight-Mon") {}
+record(ai, "${DEVICE}ImgParams:ImageHeight-Mon") {}
 
-record(ai, "${DEVICE}:ImgParams:ImageWidth-Mon") {
+record(ai, "${DEVICE}ImgParams:ImageWidth-Mon") {
     field(DTYP, "stream")
-    field(INP,  "@streakcamera.proto imgDataSize(SC:ImgParams:ImageHeight-Mon) $(CPORT)")
+    field(INP,  "@streakcamera.proto imgDataSize(${DEVICE}ImgParams:ImageHeight-Mon) $(CPORT)")
     field(SCAN, "5 second")
 }
 
-record(ai, "${DEVICE}:ImgParams:ImageOpened-Mon") {
+record(ai, "${DEVICE}ImgParams:ImageOpened-Mon") {
     field(DTYP, "stream")
     field(INP,  "@streakcamera.proto imgStatusGet() $(CPORT)")
     field(SCAN, "5 second")
 }
 
-record(ai, "${DEVICE}:ImgProfile:FHWM-Mon") {
+record(ai, "${DEVICE}ImgProfile:FHWM-Mon") {
     field(DTYP, "stream")
     field(INP,  "@streakcamera.proto qprFWHMGet() $(CPORT)")
     field(SCAN, "5 second")

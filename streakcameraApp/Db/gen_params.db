@@ -6,13 +6,13 @@
 # DATA_PORT = RemoteEx data port (1002)
 #################################################
 
-record(ao, "${DEVICE}:GenParams:TimeRange-SP") {
+record(ao, "${DEVICE}GenParams:TimeRange-SP") {
     field(DESC, "Set Time Range from 1-4")
     field(DTYP, "stream")
     field(OUT, "@streakcamera.proto devParamSet(TD,Time Range,%d) $(CPORT)")
 }
 
-record(bo, "${DEVICE}:GenParams:Mode-Sel") {
+record(bo, "${DEVICE}GenParams:Mode-Sel") {
     field(DESC, "Set operation mode")
     field(DTYP, "stream")
     field(OUT, "@streakcamera.proto devParamSet(TD,Mode,%s) $(CPORT)")
@@ -20,7 +20,7 @@ record(bo, "${DEVICE}:GenParams:Mode-Sel") {
     field(ONAM, "Operate")
 }
 
-record(bo, "${DEVICE}:GenParams:GateMode-Sel") {
+record(bo, "${DEVICE}GenParams:GateMode-Sel") {
     field(DESC, "Set gate mode")
     field(DTYP, "stream")
     field(OUT, "@streakcamera.proto devParamSet(TD,Gate Mode,%s) $(CPORT)")
@@ -28,13 +28,13 @@ record(bo, "${DEVICE}:GenParams:GateMode-Sel") {
     field(ONAM, "Ext.")
 }
 
-record(ao, "${DEVICE}:GenParams:MCPGain-SP") {
+record(ao, "${DEVICE}GenParams:MCPGain-SP") {
     field(DESC, "Set MCP gain")
     field(DTYP, "stream")
     field(OUT, "@streakcamera.proto devParamSet(TD,MCP Gain,%d) $(CPORT)")
 }
 
-record(bo, "${DEVICE}:GenParams:Shutter-Sel") {
+record(bo, "${DEVICE}GenParams:Shutter-Sel") {
     field(DESC, "Set Shutter status")
     field(DTYP, "stream")
     field(OUT, "@streakcamera.proto devParamSet(TD,Shutter,%s) $(CPORT)")
@@ -42,7 +42,7 @@ record(bo, "${DEVICE}:GenParams:Shutter-Sel") {
     field(ONST, "Open")            field(ONVL, "1")
 }
 
-record(mbbo, "${DEVICE}:GenParams:BlankingAmp-Sel") {
+record(mbbo, "${DEVICE}GenParams:BlankingAmp-Sel") {
     field(DESC,  "Set blanking amp time")
     field(DTYP, "stream")
     field(OUT, "@streakcamera.proto devParamSet(TD,Blanking Amp.,%s) $(CPORT)")
@@ -64,7 +64,7 @@ record(mbbo, "${DEVICE}:GenParams:BlankingAmp-Sel") {
     field(FFST, "5 ms")            field(FFVL, "15")
 }
 
-record(mbbo, "${DEVICE}:GenParams:HTrigStatus-Sel") {
+record(mbbo, "${DEVICE}GenParams:HTrigStatus-Sel") {
     field(DTYP, "stream")
     field(OUT, "@streakcamera.proto devParamSet(TD,H Trig. status,%s) $(CPORT)")
     field(ZRST, "Ready")           field(ZRVL, "0")
@@ -72,37 +72,37 @@ record(mbbo, "${DEVICE}:GenParams:HTrigStatus-Sel") {
     field(TWST, "Do Reset")        field(TWVL, "2")
 }
 
-record(mbbo, "${DEVICE}:GenParams:HTrigMode-Sel") {
+record(mbbo, "${DEVICE}GenParams:HTrigMode-Sel") {
     field(DTYP, "stream")
     field(OUT, "@streakcamera.proto devParamSet(TD,H Trig. mode,%s) $(CPORT)")
     field(ZRST, "Cont")            field(ZRVL, "0")
     field(ONST, "Single")          field(ONVL, "1")
 }
 
-record(ao, "${DEVICE}:GenParams:HTrigLevel-SP") {
+record(ao, "${DEVICE}GenParams:HTrigLevel-SP") {
     field(DTYP, "stream")
     field(OUT, "@streakcamera.proto devParamSet(TD,H Trig. level,%d) $(CPORT)")
 }
 
-record(ao, "${DEVICE}:GenParams:Delay-SP") {
+record(ao, "${DEVICE}GenParams:Delay-SP") {
     field(DTYP, "stream")
     field(OUT, "@streakcamera.proto devParamSet(TD,Delay,%d) $(CPORT)")
 }
 
-record(ao, "${DEVICE}:GenParams:FocusTimeOver-SP") {
+record(ao, "${DEVICE}GenParams:FocusTimeOver-SP") {
     field(DTYP, "stream")
     field(OUT, "@streakcamera.proto devParamSet(TD,FocusTimeOver,%d) $(CPORT)")
 }
 
 ## READBACKS
 
-record(ai, "${DEVICE}:GenParams:TimeRange-RB") {
+record(ai, "${DEVICE}GenParams:TimeRange-RB") {
     field(DTYP, "stream")
     field(INP,  "@streakcamera.proto devParamGetFloat(TD,Time Range) $(CPORT)")
     field(SCAN, "5 second")
 }
 
-record(mbbi, "${DEVICE}:GenParams:Mode-RB") {
+record(mbbi, "${DEVICE}GenParams:Mode-RB") {
     field(DTYP, "stream")
     field(INP,  "@streakcamera.proto devParamGetStr(TD,Mode) $(CPORT)")
     field(ZRST, "Focus")           field(ZRVL, "0")
@@ -110,7 +110,7 @@ record(mbbi, "${DEVICE}:GenParams:Mode-RB") {
     field(SCAN, "5 second")
 }
 
-record(mbbi, "${DEVICE}:GenParams:GateMode-RB") {
+record(mbbi, "${DEVICE}GenParams:GateMode-RB") {
     field(DTYP, "stream")
     field(INP,  "@streakcamera.proto devParamGetStr(TD,Gate Mode) $(CPORT)")
     field(ZRST, "Normal")          field(ZRVL, "0")
@@ -118,13 +118,13 @@ record(mbbi, "${DEVICE}:GenParams:GateMode-RB") {
     field(SCAN, "5 second")
 }
 
-record(ai, "${DEVICE}:GenParams:MCPGain-RB") {
+record(ai, "${DEVICE}GenParams:MCPGain-RB") {
     field(DTYP, "stream")
     field(INP,  "@streakcamera.proto devParamGetFloat(TD,MCP Gain) $(CPORT)")
     field(SCAN, "5 second")
 }
 
-record(mbbi, "${DEVICE}:GenParams:Shutter-RB") {
+record(mbbi, "${DEVICE}GenParams:Shutter-RB") {
     field(DTYP, "stream")
     field(INP,  "@streakcamera.proto devParamGetStr(TD,Shutter) $(CPORT)")
     field(ZRST, "Closed")          field(ZRVL, "0")
@@ -132,7 +132,7 @@ record(mbbi, "${DEVICE}:GenParams:Shutter-RB") {
     field(SCAN, "5 second")
 }
 
-record(mbbi, "${DEVICE}:GenParams:BlankingAmp-RB") {
+record(mbbi, "${DEVICE}GenParams:BlankingAmp-RB") {
     field(DTYP, "stream")
     field(INP,  "@streakcamera.proto devParamGetStr(TD,Blanking Amp.) $(CPORT)")
     field(ZRST, "off")             field(ZRVL, "0")
@@ -154,7 +154,7 @@ record(mbbi, "${DEVICE}:GenParams:BlankingAmp-RB") {
     field(SCAN, "5 second")
 }
 
-record(mbbi, "${DEVICE}:GenParams:HTrigStatus-RB") {
+record(mbbi, "${DEVICE}GenParams:HTrigStatus-RB") {
     field(DTYP, "stream")
     field(INP,  "@streakcamera.proto devParamGetStr(TD,H Trig. status) $(CPORT)")
     field(ZRST, "Ready")           field(ZRVL, "0")
@@ -163,7 +163,7 @@ record(mbbi, "${DEVICE}:GenParams:HTrigStatus-RB") {
     field(SCAN, "5 second")
 }
 
-record(mbbi, "${DEVICE}:GenParams:HTrigMode-RB") {
+record(mbbi, "${DEVICE}GenParams:HTrigMode-RB") {
     field(DTYP, "stream")
     field(INP,  "@streakcamera.proto devParamGetStr(TD,H Trig. mode) $(CPORT)")
     field(ZRST, "Cont")            field(ZRVL, "0")
@@ -171,19 +171,19 @@ record(mbbi, "${DEVICE}:GenParams:HTrigMode-RB") {
     field(SCAN, "5 second")
 }
 
-record(ai, "${DEVICE}:GenParams:HTrigLevel-RB") {
+record(ai, "${DEVICE}GenParams:HTrigLevel-RB") {
     field(DTYP, "stream")
     field(INP,  "@streakcamera.proto devParamGetFloat(TD,H Trig. level) $(CPORT)")
     field(SCAN, "5 second")
 }
 
-record(ai, "${DEVICE}:GenParams:Delay-RB") {
+record(ai, "${DEVICE}GenParams:Delay-RB") {
     field(DTYP, "stream")
     field(INP,  "@streakcamera.proto devParamGetFloat(TD,Delay) $(CPORT)")
     field(SCAN, "5 second")
 }
 
-record(ai, "${DEVICE}:GenParams:FocusTimeOver-RB") {
+record(ai, "${DEVICE}GenParams:FocusTimeOver-RB") {
     field(DTYP, "stream")
     field(INP,  "@streakcamera.proto devParamGetFloat(TD,FocusTimeOver) $(CPORT)")
     field(SCAN, "5 second")
