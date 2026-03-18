@@ -2,7 +2,7 @@
 ########## STREAK CAMERA APP OPERATION ##########
 #################################################
 # DEVICE = PVs prefix
-# COMMAND_PORT = RemoteEx commands port (1001)
+# CPORT = RemoteEx commands port (1001)
 # DATA_PORT = RemoteEx data port (1002)
 #################################################
 
@@ -10,19 +10,19 @@
 record(ao, "${DEVICE}:App:Start-Cmd") {
     field(DESC, "Starts HPD-TA application")
     field(DTYP, "stream")
-    field(OUT, "@streakcamera.proto appStart $(COMMAND_PORT)")
+    field(OUT, "@streakcamera.proto appStart $(CPORT)")
 }
 
 record(ao, "${DEVICE}:App:End-Cmd") {
     field(DESC, "Closes HPD-TA application")
     field(DTYP, "stream")
-    field(OUT, "@streakcamera.proto appEnd $(COMMAND_PORT)")
+    field(OUT, "@streakcamera.proto appEnd $(CPORT)")
 }
 
 record(stringin, "${DEVICE}:App:Info-Cte") {
     field(DESC, "HPD-TA information")
     field(DTYP, "stream")
-    field(INP, "@streakcamera.proto appInfo(Version) $(COMMAND_PORT)")
+    field(INP, "@streakcamera.proto appInfo(Version) $(CPORT)")
     field(PINI, "YES")
 }
 
@@ -30,7 +30,7 @@ record(stringin, "${DEVICE}:App:Info-Cte") {
 record(mbbo, "${DEVICE}:AcqParams:Start-Sel") {
     field(DESC, "Starts acquisition")
     field(DTYP, "stream")
-    field(OUT, "@streakcamera.proto acqStart(%s) $(COMMAND_PORT)")
+    field(OUT, "@streakcamera.proto acqStart(%s) $(CPORT)")
     field(ZRST, "Live")            field(ZRVL, "0")
     field(ONST, "Acquire")         field(ONVL, "1")
     field(TWST, "AI")              field(TWVL, "2")
@@ -41,13 +41,13 @@ record(mbbo, "${DEVICE}:AcqParams:Start-Sel") {
 record(ao, "${DEVICE}:LUT:SetAuto-Cmd") {
     field(DESC, "Auto adjust LUT")
     field(DTYP, "stream")
-    field(OUT, "@streakcamera.proto lutSetAuto() $(COMMAND_PORT)")
+    field(OUT, "@streakcamera.proto lutSetAuto() $(CPORT)")
 }
 
 record(ai, "${DEVICE}:LUT:LowerLimit-RB") {
     field(DESC, "Get LUT Lower Limits")
     field(DTYP, "stream")
-    field(INP, "@streakcamera.proto lutGetLimits(SC:LUT:UpperLimit-RB) $(COMMAND_PORT)")
+    field(INP, "@streakcamera.proto lutGetLimits(SC:LUT:UpperLimit-RB) $(CPORT)")
     field(SCAN, "5 second")
 }
 
@@ -59,7 +59,7 @@ record(ai, "${DEVICE}:LUT:UpperLimit-RB") {
 record(ao, "${DEVICE}:CamParams:Exposure-SP") {
     field(DESC, "Cam exposure time setpoint")
     field(DTYP, "stream")
-    field(OUT, "@streakcamera.proto camParamSet(Acquire,Exposure,%.2f ms) $(COMMAND_PORT)")
+    field(OUT, "@streakcamera.proto camParamSet(Acquire,Exposure,%.2f ms) $(CPORT)")
     field(EGU, "ms")
 }
 
@@ -73,7 +73,7 @@ record(calc, "${DEVICE}:CamParams:Exposure-RB") {
 
 record(ai, "${DEVICE}:CamParams:ExposureValue-RB") {
     field(DTYP, "stream")
-    field(INP, "@streakcamera.proto camParamGetExp(SC:CamParams:ExposureUnit-RB) $(COMMAND_PORT)")
+    field(INP, "@streakcamera.proto camParamGetExp(SC:CamParams:ExposureUnit-RB) $(CPORT)")
     field(SCAN, "5 second")
 }
 
