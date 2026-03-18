@@ -1,0 +1,20 @@
+services:
+  SC5680-IOC:
+    stdin_open: true
+    tty: true
+    image: ${DOCKER_IMAGE_NAME}
+    container_name: SC5680-EPICS-IOC
+    network_mode: host
+    restart: always
+    command: [
+      "-P", "${PREFIX}", 
+      "-i", "${IP_ADDR}", 
+      "-C", "${COMMANDS_TCP:1001}",
+      "-D", "${DATA_TCP:1002}"
+      ]
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "2m"
+        max-file: "10"
+

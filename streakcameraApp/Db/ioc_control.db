@@ -1,0 +1,20 @@
+#################################################
+########### STREAK CAMERA IOC CONTROL ###########
+#################################################
+# DEVICE = PVs prefix
+#################################################
+
+record(calcout, "${DEVICE}:EnableGetImgParams") {
+    field(DESC, "Enable img params getters")
+    field(CALC, "A==0")
+    field(INPA, "${DEVICE}:ImgParams:ImageOpened-Mon")
+    field(OUT,  "${DEVICE}:EnableGetImgParamsFanout MSS PP")
+    field(SCAN, "2 second")
+}
+
+record(dfanout, "${DEVICE}:EnableGetImgParamsFanout") {
+    field(DESC, "fanout params getters config")
+    field(OUTA, "${DEVICE}:ImgParams:RoiIniX-RB.DISV")
+    field(OUTB, "${DEVICE}:ImgProfile:FHWM-Mon.DISV")
+    field(OUTC, "${DEVICE}:ImgParams:ImageWidth-Mon.DISV")
+}

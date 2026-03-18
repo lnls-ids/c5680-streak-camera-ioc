@@ -1,0 +1,83 @@
+#################################################
+########## STREAK CAMERA APP OPERATION ##########
+#################################################
+# DEVICE = PVs prefix
+# COMMAND_PORT = RemoteEx commands port (1001)
+# DATA_PORT = RemoteEx data port (1002)
+#################################################
+
+################# APP COMMANDS ##################
+record(ao, "${DEVICE}:App:Start-Cmd") {
+    field(DESC, "Starts HPD-TA application")
+    field(DTYP, "stream")
+    field(OUT, "@streakcamera.proto appStart $(COMMAND_PORT)")
+}
+
+record(ao, "${DEVICE}:App:End-Cmd") {
+    field(DESC, "Closes HPD-TA application")
+    field(DTYP, "stream")
+    field(OUT, "@streakcamera.proto appEnd $(COMMAND_PORT)")
+}
+
+record(stringin, "${DEVICE}:App:Info-Cte") {
+    field(DESC, "HPD-TA information")
+    field(DTYP, "stream")
+    field(INP, "@streakcamera.proto appInfo(Version) $(COMMAND_PORT)")
+    field(PINI, "YES")
+}
+
+############# ACQUISITION COMMANDS ##############
+record(mbbo, "${DEVICE}:AcqParams:Start-Sel") {
+    field(DESC, "Starts acquisition")
+    field(DTYP, "stream")
+    field(OUT, "@streakcamera.proto acqStart(%s) $(COMMAND_PORT)")
+    field(ZRST, "Live")            field(ZRVL, "0")
+    field(ONST, "Acquire")         field(ONVL, "1")
+    field(TWST, "AI")              field(TWVL, "2")
+    field(THST, "PC")              field(THVL, "3")
+}
+
+################# LUT COMMANDS ##################
+record(ao, "${DEVICE}:LUT:SetAuto-Cmd") {
+    field(DESC, "Auto adjust LUT")
+    field(DTYP, "stream")
+    field(OUT, "@streakcamera.proto lutSetAuto() $(COMMAND_PORT)")
+}
+
+record(ai, "${DEVICE}:LUT:LowerLimit-RB") {
+    field(DESC, "Get LUT Lower Limits")
+    field(DTYP, "stream")
+    field(INP, "@streakcamera.proto lutGetLimits(SC:LUT:UpperLimit-RB) $(COMMAND_PORT)")
+    field(SCAN, "5 second")
+}
+
+record(ai, "${DEVICE}:LUT:UpperLimit-RB") {
+    field(DESC, "Get LUT Upper Limits")
+}
+
+############# CAMERA PARAMETERS ##############
+record(ao, "${DEVICE}:CamParams:Exposure-SP") {
+    field(DESC, "Cam exposure time setpoint")
+    field(DTYP, "stream")
+    field(OUT, "@streakcamera.proto camParamSet(Acquire,Exposure,%.2f ms) $(COMMAND_PORT)")
+    field(EGU, "ms")
+}
+
+record(calc, "${DEVICE}:CamParams:Exposure-RB") {
+    field(DESC, "Cam exposure time readback")
+    field(CALC, "A*B")
+    field(INPA, "${DEVICE}:CamParams:ExposureValue-RB")
+    field(INPB, "${DEVICE}:CamParams:ExposureUnit-RB")
+    field(SCAN, "5 second")
+}
+
+record(ai, "${DEVICE}:CamParams:ExposureValue-RB") {
+    field(DTYP, "stream")
+    field(INP, "@streakcamera.proto camParamGetExp(SC:CamParams:ExposureUnit-RB) $(COMMAND_PORT)")
+    field(SCAN, "5 second")
+}
+
+record(mbbi, "${DEVICE}:CamParams:ExposureUnit-RB") {
+    field(ZRST, "us")              field(ZRVL, "0")
+    field(ONST, "ms")              field(ONVL, "1")
+}
