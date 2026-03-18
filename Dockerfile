@@ -43,8 +43,8 @@ ENV PATH=${EPICS_BASE}/bin/${EPICS_HOST_ARCH}:${PATH}
 
 # --- EPICS Base ---
 WORKDIR /opt
-RUN mkdir /opt/epics-R${EPICS_VERSION} && \
-    cd /opt/epics-R${EPICS_VERSION} && \
+RUN mkdir /opt/epics-${EPICS_VERSION} && \
+    cd /opt/epics-${EPICS_VERSION} && \
     wget --no-check-certificate https://epics-controls.org/download/base/base-${EPICS_VERSION}.tar.gz && \
     tar -xzvf base-${EPICS_VERSION}.tar.gz && \
     rm -rf base-${EPICS_VERSION}.tar.gz && \
