@@ -38,8 +38,8 @@ record(bo, "${DEVICE}GenParams:Shutter-Sel") {
     field(DESC, "Set Shutter status")
     field(DTYP, "stream")
     field(OUT, "@streakcamera.proto devParamSet(TD,Shutter,%s) $(CPORT)")
-    field(ZRST, "Closed")          field(ZRVL, "0")
-    field(ONST, "Open")            field(ONVL, "1")
+    field(ZNAM, "Closed")
+    field(ONAM, "Open")
 }
 
 record(mbbo, "${DEVICE}GenParams:BlankingAmp-Sel") {
@@ -72,11 +72,11 @@ record(mbbo, "${DEVICE}GenParams:HTrigStatus-Sel") {
     field(TWST, "Do Reset")        field(TWVL, "2")
 }
 
-record(mbbo, "${DEVICE}GenParams:HTrigMode-Sel") {
+record(bo, "${DEVICE}GenParams:HTrigMode-Sel") {
     field(DTYP, "stream")
     field(OUT, "@streakcamera.proto devParamSet(TD,H Trig. mode,%s) $(CPORT)")
-    field(ZRST, "Cont")            field(ZRVL, "0")
-    field(ONST, "Single")          field(ONVL, "1")
+    field(ZNAM, "Cont")
+    field(ONAM, "Single")
 }
 
 record(ao, "${DEVICE}GenParams:HTrigLevel-SP") {
@@ -102,19 +102,19 @@ record(ai, "${DEVICE}GenParams:TimeRange-RB") {
     field(SCAN, "5 second")
 }
 
-record(mbbi, "${DEVICE}GenParams:Mode-RB") {
+record(bi, "${DEVICE}GenParams:Mode-Sts") {
     field(DTYP, "stream")
     field(INP,  "@streakcamera.proto devParamGetStr(TD,Mode) $(CPORT)")
-    field(ZRST, "Focus")           field(ZRVL, "0")
-    field(ONST, "Operate")         field(ONVL, "1")
+    field(ZNAM, "Focus")
+    field(ONAM, "Operate")
     field(SCAN, "5 second")
 }
 
-record(mbbi, "${DEVICE}GenParams:GateMode-RB") {
+record(bi, "${DEVICE}GenParams:GateMode-Sts") {
     field(DTYP, "stream")
     field(INP,  "@streakcamera.proto devParamGetStr(TD,Gate Mode) $(CPORT)")
-    field(ZRST, "Normal")          field(ZRVL, "0")
-    field(ONST, "Ext.")            field(ONVL, "1")
+    field(ZNAM, "Normal")
+    field(ONAM, "Ext.")
     field(SCAN, "5 second")
 }
 
@@ -124,11 +124,11 @@ record(ai, "${DEVICE}GenParams:MCPGain-RB") {
     field(SCAN, "5 second")
 }
 
-record(mbbi, "${DEVICE}GenParams:Shutter-RB") {
+record(bi, "${DEVICE}GenParams:Shutter-Sts") {
     field(DTYP, "stream")
     field(INP,  "@streakcamera.proto devParamGetStr(TD,Shutter) $(CPORT)")
-    field(ZRST, "Closed")          field(ZRVL, "0")
-    field(ONST, "Open")            field(ONVL, "1")
+    field(ZNAM, "Closed")
+    field(ONAM, "Open")
     field(SCAN, "5 second")
 }
 
@@ -163,11 +163,11 @@ record(mbbi, "${DEVICE}GenParams:HTrigStatus-RB") {
     field(SCAN, "5 second")
 }
 
-record(mbbi, "${DEVICE}GenParams:HTrigMode-RB") {
+record(bi, "${DEVICE}GenParams:HTrigMode-Sts") {
     field(DTYP, "stream")
     field(INP,  "@streakcamera.proto devParamGetStr(TD,H Trig. mode) $(CPORT)")
-    field(ZRST, "Cont")            field(ZRVL, "0")
-    field(ONST, "Single")          field(ONVL, "1")
+    field(ZNAM, "Cont")
+    field(ONAM, "Single") 
     field(SCAN, "5 second")
 }
 

@@ -6,15 +6,46 @@
 # DPORT = RemoteEx data port (1002)
 #################################################
 
+################# LUT COMMANDS ##################
+record(ao, "${DEVICE}LUT:SetAuto-Cmd") {
+    field(DESC, "Auto adjust LUT")
+    field(DTYP, "stream")
+    field(OUT, "@streakcamera.proto lutSetAuto() $(CPORT)")
+}
+
+record(ai, "${DEVICE}LUT:LowerLimit-RB") {
+    field(DESC, "Get LUT Lower Limits")
+    field(DTYP, "stream")
+    field(INP, "@streakcamera.proto lutGetLimits(${DEVICE}LUT:UpperLimit-RB) $(CPORT)")
+    field(SCAN, "5 second")
+}
+
+record(ai, "${DEVICE}LUT:UpperLimit-RB") {
+    field(DESC, "Get LUT Upper Limits")
+}
+
+############### ROI COMMANDS ####################
 record(ao, "${DEVICE}ImgParams:CreateVerRectRoi-Cmd") {
+    field(DESC, "Creates vertical rect ROI")
     field(DTYP, "stream")
     field(OUT, "@streakcamera.proto imgRoiSet(VerRect,%(${DEVICE}ImgParams:RoiIniX-SP)d,0,%(${DEVICE}ImgParams:RoiWidthX-SP)d,%(${DEVICE}ImgParams:ImageHeight-Mon)d) $(CPORT)")
 }
 
-record(ao, "${DEVICE}ImgParams:RoiIniX-SP")   {}
-record(ao, "${DEVICE}ImgParams:RoiIniY-SP")   {}
-record(ao, "${DEVICE}ImgParams:RoiWidthX-SP") {}
-record(ao, "${DEVICE}ImgParams:RoiWidthY-SP") {}
+record(ao, "${DEVICE}ImgParams:RoiIniX-SP") {
+    field(DESC, "ROI initial X position sp")
+}
+
+record(ao, "${DEVICE}ImgParams:RoiIniY-SP") {
+    field(DESC, "ROI initial Y position sp")
+}
+
+record(ao, "${DEVICE}ImgParams:RoiWidthX-SP") {
+    field(DESC, "ROI width X position sp")
+}
+
+record(ao, "${DEVICE}ImgParams:RoiWidthY-SP") {
+    field(DESC, "ROI width Y position sp")
+}
 
 ## READBACKS
 record(ai, "${DEVICE}ImgParams:RoiIniX-RB"){
@@ -23,26 +54,37 @@ record(ai, "${DEVICE}ImgParams:RoiIniX-RB"){
     field(SCAN, "5 second")
 }
 
-record(ao, "${DEVICE}ImgParams:RoiIniY-RB")   {}
-record(ao, "${DEVICE}ImgParams:RoiWidthX-RB") {}
-record(ao, "${DEVICE}ImgParams:RoiWidthY-RB") {}
+record(ao, "${DEVICE}ImgParams:RoiIniY-RB") {
+    field(DESC, "ROI initial Y position rb")
+}
 
-## Monitoring Records
-record(ai, "${DEVICE}ImgParams:ImageHeight-Mon") {}
+record(ao, "${DEVICE}ImgParams:RoiWidthX-RB") {
+    field(DESC, "ROI width X position rb")
+}
 
+record(ao, "${DEVICE}ImgParams:RoiWidthY-RB") {
+    field(DESC, "ROI width Y position rb")
+}
+
+############### IMAGE MONITORING ################
 record(ai, "${DEVICE}ImgParams:ImageWidth-Mon") {
     field(DTYP, "stream")
     field(INP,  "@streakcamera.proto imgDataSize(${DEVICE}ImgParams:ImageHeight-Mon) $(CPORT)")
     field(SCAN, "5 second")
 }
 
+record(ai, "${DEVICE}ImgParams:ImageHeight-Mon") {
+    field(DESC, "Get image height")
+}
+
 record(ai, "${DEVICE}ImgParams:ImageOpened-Mon") {
+    field(DESC, "Get image opened status")
     field(DTYP, "stream")
     field(INP,  "@streakcamera.proto imgStatusGet() $(CPORT)")
     field(SCAN, "5 second")
 }
 
-record(ai, "${DEVICE}ImgProfile:FHWM-Mon") {
+record(ai, "${DEVICE}ImgProfile:FWHM-Mon") {
     field(DTYP, "stream")
     field(INP,  "@streakcamera.proto qprFWHMGet() $(CPORT)")
     field(SCAN, "5 second")

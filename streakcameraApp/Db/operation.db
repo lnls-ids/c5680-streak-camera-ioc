@@ -37,24 +37,6 @@ record(mbbo, "${DEVICE}AcqParams:Start-Sel") {
     field(THST, "PC")              field(THVL, "3")
 }
 
-################# LUT COMMANDS ##################
-record(ao, "${DEVICE}LUT:SetAuto-Cmd") {
-    field(DESC, "Auto adjust LUT")
-    field(DTYP, "stream")
-    field(OUT, "@streakcamera.proto lutSetAuto() $(CPORT)")
-}
-
-record(ai, "${DEVICE}LUT:LowerLimit-RB") {
-    field(DESC, "Get LUT Lower Limits")
-    field(DTYP, "stream")
-    field(INP, "@streakcamera.proto lutGetLimits(${DEVICE}LUT:UpperLimit-RB) $(CPORT)")
-    field(SCAN, "5 second")
-}
-
-record(ai, "${DEVICE}LUT:UpperLimit-RB") {
-    field(DESC, "Get LUT Upper Limits")
-}
-
 ############# CAMERA PARAMETERS ##############
 record(ao, "${DEVICE}CamParams:Exposure-SP") {
     field(DESC, "Cam exposure time setpoint")

@@ -15,6 +15,6 @@ record(calcout, "${DEVICE}EnableGetImgParams") {
 record(dfanout, "${DEVICE}EnableGetImgParamsFanout") {
     field(DESC, "fanout params getters config")
     field(OUTA, "${DEVICE}ImgParams:RoiIniX-RB.DISV")
-    field(OUTB, "${DEVICE}ImgProfile:FHWM-Mon.DISV")
+    field(OUTB, "${DEVICE}ImgProfile:FWHM-Mon.DISV")
     field(OUTC, "${DEVICE}ImgParams:ImageWidth-Mon.DISV")
 }
