@@ -1,7 +1,3 @@
-# SPDX-FileCopyrightText: 1998 Argonne National Laboratory
-#
-# SPDX-License-Identifier: EPICS
-
 TOP=../..
 include $(TOP)/configure/CONFIG
 #----------------------------------------
@@ -11,7 +7,13 @@ include $(TOP)/configure/CONFIG
 # Create and install (or just install) into <top>/db
 # databases, templates, substitutions like this
 #DB += xxx.db
+DB += sc5680.req
 
+DB += operation.db
+DB += ioc_control.db
+DB += gen_params.db
+DB += img_params.db
+DB += streakcamera.proto
 #----------------------------------------------------
 # If <anyname>.db template is not named <anyname>*.template add
 # <anyname>_template = <templatename>
@@ -19,9 +21,3 @@ include $(TOP)/configure/CONFIG
 include $(TOP)/configure/RULES
 #----------------------------------------
 #  ADD RULES AFTER THIS LINE
-
-DB += operation.db
-DB += ioc_control.db
-DB += gen_params.db
-DB += img_params.db
-DB += streakcamera.proto

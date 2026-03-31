@@ -1,7 +1,3 @@
-# SPDX-FileCopyrightText: 2003 Argonne National Laboratory
-#
-# SPDX-License-Identifier: EPICS
-
 TOP=../..
 
 include $(TOP)/configure/CONFIG
@@ -21,9 +17,18 @@ streakcamera_DBD += base.dbd
 
 # Include dbd files from all support applications:
 #streakcamera_DBD += xxx.dbd
+streakcamera_DBD += stream-base.dbd
+streakcamera_DBD += asyn.dbd
+streakcamera_DBD += drvAsynIPPort.dbd
+streakcamera_DBD += calcSupport.dbd
+streakcamera_DBD += asSupport.dbd
 
 # Add all the support libraries needed by this IOC
 #streakcamera_LIBS += xxx
+streakcamera_LIBS += stream
+streakcamera_LIBS += asyn 
+streakcamera_LIBS += calc 
+streakcamera_LIBS += autosave
 
 # streakcamera_registerRecordDeviceDriver.cpp derives from streakcamera.dbd
 streakcamera_SRCS += streakcamera_registerRecordDeviceDriver.cpp
@@ -43,12 +48,3 @@ streakcamera_LIBS += $(EPICS_BASE_IOC_LIBS)
 include $(TOP)/configure/RULES
 #----------------------------------------
 #  ADD RULES AFTER THIS LINE
-
-streakcamera_DBD += stream.dbd
-streakcamera_DBD += asyn.dbd
-streakcamera_DBD += drvAsynIPPort.dbd
-streakcamera_DBD += calcSupport.dbd
-
-streakcamera_LIBS += stream
-streakcamera_LIBS += asyn 
-streakcamera_LIBS += calc 

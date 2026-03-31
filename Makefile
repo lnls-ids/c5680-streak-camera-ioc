@@ -1,7 +1,3 @@
-# SPDX-FileCopyrightText: 1997 Argonne National Laboratory
-#
-# SPDX-License-Identifier: EPICS
-
 # Makefile at top of application tree
 TOP = .
 include $(TOP)/configure/CONFIG
