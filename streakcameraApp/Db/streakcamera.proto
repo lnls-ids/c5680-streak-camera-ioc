@@ -1,0 +1,43 @@
+OutTerminator = CR;
+InTerminator  = CR;
+ReplyTimeout  = 5000;
+
+# App commands
+appStart { out "AppStart()"; in "%d,AppStart"; }
+appInfo  { out "AppInfo(\$1)"; in "0,AppInfo,%s"; }
+appEnd   { out "AppEnd()"; }
+stop     { out "Stop()"; in "%d,Stop"; }
+
+# App Parameter commands
+mainParamGet     { out "MainParamGet(\$1)"; in "0,MainParamInfo,\$1,%f,*"; }
+devParamSet      { out "DevParamSet(\$1,\$2,\$3)"; in "%d,DevParamSet"; }
+devParamGetFloat { out "DevParamGet(\$1,\$2)"; in "0,DevParamGet,%f"; }
+devParamGetStr   { out "DevParamGet(\$1,\$2)"; in "0,DevParamGet,%s"; }
+genParamSet      { out "GenParamSet(\$1,%f)"; in "%d,GenParamSet"; }
+genParamGet      { out "GenParamGet(\$1)"; in "%d,GenParamGet,*"; }
+mainSyncGet      { out "MainSyncGet()"; in "0,MainSyncGet,\$1,\$2,\$3,*"; }
+mainSyncSet      { out "MainSyncSet(\$1)"; in "%d,MainSyncSet"; }
+
+# Acquisition commands
+acqStart  { out "AcqStart(\$1)"; in "%d,AcqStart"; }
+acqStatus { out "AcqStatus()"; in "0,AcqStatus,%s"; }
+acqStop   { out "AcqStop(5000)"; in "%d,AcqStop%*s"; }
+
+# Camera commands
+camParamGetFloat { out "CamParamGet(\$1,\$2)"; in "0,CamParamGet,%f"; }
+camParamGetStr   { out "CamParamGet(\$1,\$2)"; in "0,CamParamGet,%s"; }
+camParamSet      { out "CamParamSet(\$1,\$2,\$3)"; in "%d,CamParamSet"; }
+camParamGetExp   { out "CamParamGet(Acquire,Exposure)"; in "0,CamParamGet,%d %(\$1)s"; }
+
+# Image commands
+imgStatusGet { out "ImgStatusGet(Current,All)"; in "%d,ImgStatusGet"; ExtraInput = Ignore; }
+imgDataSize  { out "ImgDataInfo(Current,Size)"; in "0,ImgDataInfo,%*d,%*d,%d,%(\$1)d,%*d"; }
+imgRoiGet    { out "ImgRoiGet(Current,Selected)"; in "0,ImgRoiGet,%*d,%d,%(\$1)d,%(\$2)d,%(\$3)d"; }
+imgRoiSet    { out "ImgRoiSet(Current,Selected,\$1,\$2,\$3,\$4,\$5)"; in "%d,ImgRoiSet"; }
+
+# Quick Profile commands
+qprFWHMGet { out "QprFWHMGet()"; in "0,QprFWHMGet,%f,%(EGU)s" }
+
+# LUT commands
+lutSetAuto   { out "LutSetAuto()"; }
+lutGetLimits { out "LutParamGet(Limits)"; in "0,LutParamGet,%d,%(\$1)d,%*d" }

@@ -1,0 +1,15 @@
+file gen_params.template {
+    {}
+}
+
+file img_params.template {
+    {}
+}
+
+file ioc_control.template {
+    {}
+}
+
+file operation.template {
+    {}
+}

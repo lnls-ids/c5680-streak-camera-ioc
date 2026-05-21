@@ -1,0 +1,19 @@
+services:
+  ioc:
+    image: ghcr.io/lnls-ids/c5680-streak-camera-ioc
+    build:
+      context: ./
+      dockerfile: docker/Dockerfile
+      target: dynamic-link
+      labels:
+        org.opencontainers.image.source: https://github.com/lnls-ids/c5680-streak-camera-ioc
+      args:
+        REPONAME: c5680-streak-camera-ioc
+        RUNDIR: /opt/c5680-streak-camera-ioc/iocBoot/iocstreakcamera
+        ENTRYPOINT: ./runProcServ.sh
+    command: [
+      "-P", "${PREFIX}", 
+      "-i", "${IP_ADDR}", 
+      "-C", "${COMMANDS_TCP:-1001}",
+      "-D", "${DATA_TCP:-1002}"
+    ]

@@ -1,0 +1,65 @@
+#################################################
+########## STREAK CAMERA APP OPERATION ##########
+#################################################
+# DEVICE = PVs prefix
+# CPORT = RemoteEx commands port (1001)
+# DATA_PORT = RemoteEx data port (1002)
+#################################################
+
+################# APP COMMANDS ##################
+record(ao, "${DEVICE}App:Start-Cmd") {
+    field(DESC, "Starts HPD-TA application")
+    field(DTYP, "stream")
+    field(OUT, "@streakcamera.proto appStart $(CPORT)")
+}
+
+record(ao, "${DEVICE}App:End-Cmd") {
+    field(DESC, "Closes HPD-TA application")
+    field(DTYP, "stream")
+    field(OUT, "@streakcamera.proto appEnd $(CPORT)")
+}
+
+record(stringin, "${DEVICE}App:Info-Cte") {
+    field(DESC, "HPD-TA information")
+    field(DTYP, "stream")
+    field(INP, "@streakcamera.proto appInfo(Version) $(CPORT)")
+    field(PINI, "YES")
+}
+
+############# ACQUISITION COMMANDS ##############
+record(mbbo, "${DEVICE}AcqParams:Start-Sel") {
+    field(DESC, "Starts acquisition")
+    field(DTYP, "stream")
+    field(OUT, "@streakcamera.proto acqStart(%s) $(CPORT)")
+    field(ZRST, "Live")            field(ZRVL, "0")
+    field(ONST, "Acquire")         field(ONVL, "1")
+    field(TWST, "AI")              field(TWVL, "2")
+    field(THST, "PC")              field(THVL, "3")
+}
+
+############# CAMERA PARAMETERS ##############
+record(ao, "${DEVICE}CamParams:Exposure-SP") {
+    field(DESC, "Cam exposure time setpoint")
+    field(DTYP, "stream")
+    field(OUT, "@streakcamera.proto camParamSet(Acquire,Exposure,%.2f ms) $(CPORT)")
+    field(EGU, "ms")
+}
+
+record(calc, "${DEVICE}CamParams:Exposure-RB") {
+    field(DESC, "Cam exposure time readback")
+    field(CALC, "A*B")
+    field(INPA, "${DEVICE}CamParams:ExposureValue-RB")
+    field(INPB, "${DEVICE}CamParams:ExposureUnit-RB")
+    field(SCAN, "5 second")
+}
+
+record(ai, "${DEVICE}CamParams:ExposureValue-RB") {
+    field(DTYP, "stream")
+    field(INP, "@streakcamera.proto camParamGetExp(${DEVICE}CamParams:ExposureUnit-RB) $(CPORT)")
+    field(SCAN, "5 second")
+}
+
+record(mbbi, "${DEVICE}CamParams:ExposureUnit-RB") {
+    field(ZRST, "us")              field(ZRVL, "0")
+    field(ONST, "ms")              field(ONVL, "1")
+}
