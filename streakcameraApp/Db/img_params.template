@@ -13,14 +13,14 @@ record(ao, "${DEVICE}LUT:SetAuto-Cmd") {
     field(OUT, "@streakcamera.proto lutSetAuto() $(CPORT)")
 }
 
-record(ai, "${DEVICE}LUT:LowerLimit-RB") {
+record(ai, "${DEVICE}LUT:LowerLimit-Mon") {
     field(DESC, "Get LUT Lower Limits")
     field(DTYP, "stream")
     field(INP, "@streakcamera.proto lutGetLimits(${DEVICE}LUT:UpperLimit-RB) $(CPORT)")
     field(SCAN, "5 second")
 }
 
-record(ai, "${DEVICE}LUT:UpperLimit-RB") {
+record(ai, "${DEVICE}LUT:UpperLimit-Mon") {
     field(DESC, "Get LUT Upper Limits")
 }
 

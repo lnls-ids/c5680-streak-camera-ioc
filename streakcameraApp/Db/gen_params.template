@@ -132,7 +132,7 @@ record(bi, "${DEVICE}GenParams:Shutter-Sts") {
     field(SCAN, "5 second")
 }
 
-record(mbbi, "${DEVICE}GenParams:BlankingAmp-RB") {
+record(mbbi, "${DEVICE}GenParams:BlankingAmp-Sts") {
     field(DTYP, "stream")
     field(INP,  "@streakcamera.proto devParamGetStr(TD,Blanking Amp.) $(CPORT)")
     field(ZRST, "off")             field(ZRVL, "0")
