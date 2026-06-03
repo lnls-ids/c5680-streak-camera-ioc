@@ -1,0 +1,17 @@
+${PREFIX}GenParams:TimeRange-SP
+${PREFIX}GenParams:Mode-Sel
+${PREFIX}GenParams:GateMode-Sel
+${PREFIX}GenParams:MCPGain-SP
+${PREFIX}GenParams:Shutter-Sel
+${PREFIX}GenParams:BlankingAmp-Sel
+${PREFIX}GenParams:HTrigStatus-Sel
+${PREFIX}GenParams:HTrigMode-Sel
+${PREFIX}GenParams:HTrigLevel-SP
+${PREFIX}GenParams:Delay-SP
+${PREFIX}GenParams:FocusTimeOver-SP
+${PREFIX}ImgParams:RoiIniX-SP
+${PREFIX}ImgParams:RoiIniY-SP
+${PREFIX}ImgParams:RoiWidthX-SP
+${PREFIX}ImgParams:RoiWidthY-SP
+${PREFIX}AcqParams:Start-Sel
+${PREFIX}CamParams:Exposure-SP

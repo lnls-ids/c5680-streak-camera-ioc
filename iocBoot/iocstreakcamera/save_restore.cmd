@@ -11,7 +11,7 @@ save_restoreSet_SeqPeriodInSeconds(300)
 
 set_savefile_path("/opt/", "autosave")
 
-set_pass0_restoreFile("${IOCNAME}.sav")
-set_pass1_restoreFile("${IOCNAME}.sav")
+set_requestfile_path("${TOP}", "streakcameraApp/Db")
 
-set_requestfile_path("${TOP}", "db")
+set_pass0_restoreFile("${PREFIX}_settings.sav")
+set_pass1_restoreFile("${PREFIX}_settings.sav")

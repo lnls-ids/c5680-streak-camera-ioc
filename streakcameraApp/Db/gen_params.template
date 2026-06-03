@@ -154,7 +154,7 @@ record(mbbi, "${DEVICE}GenParams:BlankingAmp-Sts") {
     field(SCAN, "5 second")
 }
 
-record(mbbi, "${DEVICE}GenParams:HTrigStatus-RB") {
+record(mbbi, "${DEVICE}GenParams:HTrigStatus-Sts") {
     field(DTYP, "stream")
     field(INP,  "@streakcamera.proto devParamGetStr(TD,H Trig. status) $(CPORT)")
     field(ZRST, "Ready")           field(ZRVL, "0")

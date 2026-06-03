@@ -2,7 +2,7 @@
 
 < envPaths
 
-epicsEnvSet("IOCNAME", "StreakCamera-5680")
+epicsEnvSet("IOCNAME", "sc5680")
 epicsEnvSet("STREAM_PROTOCOL_PATH", "${TOP}/streakcameraApp/Db")
 epicsEnvSet("COMMAND_PORT", "SC_Comm")
 epicsEnvSet("DATA_PORT", "SC_Data")
@@ -29,5 +29,5 @@ cd "${TOP}/iocBoot/${IOC}"
 
 iocInit
 
-create_monitor_set("sc5680.req", 30, "P=${PREFIX}")
-set_savefile_name("sc5680.req", "${IOCNAME}.sav")
+create_monitor_set("${IOCNAME}_settings.req", 30, "PREFIX=${PREFIX}")
+set_savefile_name("${IOCNAME}_settings.req", "${IOCNAME}_settings.sav")

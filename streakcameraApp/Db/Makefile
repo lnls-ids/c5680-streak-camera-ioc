@@ -7,7 +7,6 @@ include $(TOP)/configure/CONFIG
 # Create and install (or just install) into <top>/db
 # databases, templates, substitutions like this
 #DB += xxx.db
-DB += sc5680.req
 
 DB += operation.db
 DB += ioc_control.db
